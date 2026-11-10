@@ -1,0 +1,224 @@
+Informe de rendimiento
+Evaluación física integral
+ATLETA DEMO
+Futbol · extremo · Sub15 · Club Demo
+15
+Años
+60
+kg
+170
+cm
+20
+Pruebas
+01/01/2027 · Documento confidencial
+01
+VISIÓN GENERAL
+Resumen de la evaluación
+Evaluación de prueba con datos inventados. Muestra una diferencia alta entre
+lados en la flexión de rodilla.
+20
+Pruebas registradas
+3
+Capacidades evaluadas
+ALERTAS PRIORITARIAS
+Asimetría bilateral > 15% en ROD. FLEXIÓN 90° (25%)
+Evaluar causa. No progresar carga hasta clarificar.
+ESTADO AL MOMENTO DE MEDIR · AUTORREPORTE 1·5
+Sueño
+4/5
+Energía
+2/5
+Recuperación
+3/5
+Estrés
+3/5
+Fatiga
+3/5
+Dolor
+1/5
+02
+ENCUADRE
+Contexto de la evaluación
+OBJETIVO
+CARGA RECIENTE
+inicio programa
+descansado
+ESTADO DE MEDICIÓN
+optimo
+03
+BIOMÉTRICOS
+Antropometría
+60 kg
+Peso
+1.7 cm
+Estatura
+20.8
+IMC
+04
+FUERZA ISOMÉTRICA
+Dinamometría
+RODILLA
+Flexión de rodilla 90°
+Diferencia alta · 25%
+IZQ
+15 kg
+DER
+20 kg
+Fuerza relativa: IZQ 0.25 · DER 0.33 ×PC
+Extensión de rodilla 60°
+Diferencia baja · 5%
+IZQ
+40 kg
+DER
+38 kg
+Fuerza relativa: IZQ 0.67 · DER 0.63 ×PC
+GENERAL
+Empuje horizontal
+Diferencia baja · 6.3%
+IZQ
+75 kg
+DER
+80 kg
+OTROS
+EMPUJE HORIZONTAL
+150kg
+COCIENTE ISQUIOTIBIALES / CUÁDRICEPS · ISOMÉTRICO
+IZQ
+0.38
+Flexión 15 kg ÷ extensión 40 kg (promedio de ángulos)
+DER
+0.53
+Flexión 20 kg ÷ extensión 38 kg (promedio de ángulos)
+Comparación interna entre lados y en el tiempo.
+05
+POTENCIA
+Saltos y pliometría
+CMJ
+Cv alto
+30 cm
+Promedio 27 cm
+CV 12%
+Intentos 3
+24
+27
+30
+Protocolo: manos libres
+DROP JUMP
+Reactivo
+1.5 RSI
+Altura 24 cm
+Contacto 160 ms
+Caja 30 cm
+Intentos 1
+DROP JUMP
+Reactivo
+1.5 RSI
+Altura 24 cm
+Contacto 160 ms
+Caja 45 cm
+Intentos 1
+06
+VELOCIDAD
+Sprint y cambio de dirección
+CARRERA DE 20 M · TIEMPOS ACUMULADOS
+INTENTO
+10 M
+20 M
+1
+2.00 s
+3.40 s
+2 MEJOR
+1.95 s
+3.30 s
+07
+VBT
+Entrenamiento basado en velocidad
+Trap Bar deadlift
+3 series
+SERIE
+CARGA kg
+REPS
+V MEDIA m/s
+MEJOR REP.
+m/s
+V PICO m/s
+1
+40
+5
+0.95
+1.05
+1.60
+2
+60
+4
+0.75
+0.85
+1.30
+3
+80
+3
+0.55
+0.65
+1.00
+Fuerza acelerativa
+85 kg
+a 0.60 m/s
+08
+PLANIFICACIÓN
+Plan de 6 semanas
+Del 04/01/2027 al 14/02/2027. Contenido de prueba.
+VELOCIDAD
+CARGA
+1.00 m/s
+50 kg
+Semana 1
+Base · Carga
+Aprender los patrones con volumen bajo.
+LUN
+04/01
+Fuerza básica
+Barra hexagonal guiada por velocidad.
+50 min
+FUERZA PRINCIPAL (VBT)
+Peso muerto con barra hexagonal
+VBT: mejor repetición 1.00 m/s. Cortar si baja de
+0.90 m/s.
+3 × 5
+50 kg
+UNILATERAL
+Sentadilla búlgara
++1 serie IZQ
+3 × 8 por lado
+Mancuernas, RPE
+7
+Nordic curl (isquiotibiales)
+2 × 4
+MIÉ
+06/01
+Velocidad
+Aceleración corta.
+40 min
+SPRINT
+Sprint de aceleración
+4 × 10 m
+Empuje de trineo
+3 × 10 m
+Moderada: que no
+se rompa la postura
+Semana 2
+Base · Carga
+Más volumen.
+LUN
+11/01
+Fuerza básica
+Barra hexagonal guiada por velocidad.
+50 min
+FUERZA PRINCIPAL (VBT)
+Peso muerto con barra hexagonal
+4 × 5
+95 kg
+09
+CIERRE
+Plan de acción
+Solo una carga evaluada en VBT; completar el perfil.
+Reevaluar en 6 semanas.

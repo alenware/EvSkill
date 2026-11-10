@@ -1,0 +1,7 @@
+﻿semana,fase,dia,fecha,sesion,duracion_min,orden,bloque,ejercicio,serie_extra,series,reps,por_lado,dosis,carga_nota,indicaciones
+1,Base · Carga,LUN,04/01,Fuerza básica,50,1,FUERZA PRINCIPAL (VBT),Peso muerto con barra hexagonal,,3,5,False,3 × 5,50 kg,VBT: mejor repetición 1.00 m/s. Cortar si baja de 0.90 m/s.
+1,Base · Carga,LUN,04/01,Fuerza básica,50,2,UNILATERAL,Sentadilla búlgara,+1 serie IZQ,3,8,True,3 × 8 por lado,"Mancuernas, RPE 7",
+1,Base · Carga,LUN,04/01,Fuerza básica,50,3,UNILATERAL,Nordic curl (isquiotibiales),,2,4,False,2 × 4,,
+1,Base · Carga,MIÉ,06/01,Velocidad,40,1,SPRINT,Sprint de aceleración,,4,10 m,False,4 × 10 m,,
+1,Base · Carga,MIÉ,06/01,Velocidad,40,2,SPRINT,Empuje de trineo,,3,10 m,False,3 × 10 m,Moderada: que no se rompa la postura,
+2,Base · Carga,LUN,11/01,Fuerza básica,50,1,FUERZA PRINCIPAL (VBT),Peso muerto con barra hexagonal,,4,5,False,4 × 5,95 kg,

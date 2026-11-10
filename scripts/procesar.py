@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Procesa el JSON que sale de kinereach_md.py.
+"""Procesa el JSON que sale de convertir.py.
 
 Subcomandos:
     revisar  datos.json            busca incoherencias del informe (unidades, sumas, CV, sprint, VBT...)

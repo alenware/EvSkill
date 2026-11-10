@@ -9,9 +9,10 @@ import unittest
 AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(AQUI, "..", "scripts"))
 sys.path.insert(0, AQUI)
+sys.path.insert(0, os.path.join(AQUI, ".."))
 
 import fabricar_demo  # noqa: E402
-import kinereach_md  # noqa: E402
+import convertir  # noqa: E402
 import procesar  # noqa: E402
 
 
@@ -20,7 +21,7 @@ class TestDemo(unittest.TestCase):
     def setUpClass(cls):
         cls.tmp = tempfile.TemporaryDirectory()
         cls.pdf = fabricar_demo.fabricar(os.path.join(cls.tmp.name, "demo.pdf"))
-        kinereach_md.main([cls.pdf, "--salida", cls.tmp.name])
+        convertir.main([cls.pdf, "--salida", cls.tmp.name])
         cls.json = os.path.join(cls.tmp.name, "demo.json")
         with open(cls.json, encoding="utf-8") as f:
             cls.d = json.load(f)
@@ -109,3 +110,23 @@ class TestDemo(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestEntradaUnica(unittest.TestCase):
+    def test_todo(self):
+        import evskill
+        with tempfile.TemporaryDirectory() as tmp:
+            pdf = fabricar_demo.fabricar(os.path.join(tmp, "demo.pdf"))
+            evskill.main(["todo", pdf, "--salida", tmp])
+            for ext in (".md", ".json", ".txt", ".revision.md", ".plan.csv"):
+                self.assertTrue(os.path.exists(os.path.join(tmp, "demo" + ext)), ext)
+
+    def test_ejemplos_al_dia(self):
+        """ejemplos/demo.json tiene que coincidir con lo que sale hoy del PDF sintético."""
+        with tempfile.TemporaryDirectory() as tmp:
+            pdf = fabricar_demo.fabricar(os.path.join(tmp, "demo.pdf"))
+            convertir.main([pdf, "--salida", tmp])
+            with open(os.path.join(tmp, "demo.json"), encoding="utf-8") as f:
+                nuevo = json.load(f)
+        with open(os.path.join(AQUI, "..", "ejemplos", "demo.json"), encoding="utf-8") as f:
+            self.assertEqual(nuevo, json.load(f), "regenera ejemplos/: python evskill.py todo ejemplos/demo.pdf")

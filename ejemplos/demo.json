@@ -1,0 +1,332 @@
+{
+ "fuente": "demo.pdf",
+ "paginas": 7,
+ "secciones": [
+  "01 VISIÓN GENERAL",
+  "02 ENCUADRE",
+  "03 BIOMÉTRICOS",
+  "04 FUERZA ISOMÉTRICA",
+  "05 POTENCIA",
+  "06 VELOCIDAD",
+  "07 VBT",
+  "08 PLANIFICACIÓN",
+  "09 CIERRE"
+ ],
+ "sin_reconocer": [],
+ "atleta": {
+  "tipo_informe": "Evaluación física integral",
+  "nombre": "Atleta Demo",
+  "contexto": "Futbol · extremo · Sub15 · Club Demo",
+  "fecha_evaluacion": "01/01/2027",
+  "edad": 15,
+  "peso_kg": 60,
+  "estatura": 170,
+  "pruebas": 20
+ },
+ "resumen": {
+  "resumen": "Evaluación de prueba con datos inventados. Muestra una diferencia alta entre lados en la flexión de rodilla.",
+  "pruebas_registradas": 20,
+  "capacidades_evaluadas": 3,
+  "alertas": [
+   {
+    "titulo": "Asimetría bilateral > 15% en ROD. FLEXIÓN 90° (25%)",
+    "detalle": "Evaluar causa. No progresar carga hasta clarificar."
+   }
+  ]
+ },
+ "autorreporte": {
+  "sueño": 4,
+  "energía": 2,
+  "recuperación": 3,
+  "estrés": 3,
+  "fatiga": 3,
+  "dolor": 1
+ },
+ "encuadre": {
+  "OBJETIVO": "inicio programa",
+  "CARGA RECIENTE": "descansado",
+  "ESTADO DE MEDICIÓN": "optimo"
+ },
+ "biometricos": {
+  "peso_kg": 60,
+  "estatura": 1.7,
+  "estatura_unidad": "cm",
+  "imc": 20.8
+ },
+ "dinamometria": [
+  {
+   "grupo": "Rodilla",
+   "prueba": "Flexión de rodilla 90°",
+   "izq": 15,
+   "der": 20,
+   "unidad": "kg",
+   "diferencia_pct": 25.0,
+   "lado_menor": "izq",
+   "diferencia_pct_informe": 25.0,
+   "nivel_informe": "alta",
+   "relativa_izq": 0.25,
+   "relativa_der": 0.33
+  },
+  {
+   "grupo": "Rodilla",
+   "prueba": "Extensión de rodilla 60°",
+   "izq": 40,
+   "der": 38,
+   "unidad": "kg",
+   "diferencia_pct": 5.0,
+   "lado_menor": "der",
+   "diferencia_pct_informe": 5.0,
+   "nivel_informe": "baja",
+   "relativa_izq": 0.67,
+   "relativa_der": 0.63
+  },
+  {
+   "grupo": "General",
+   "prueba": "Empuje horizontal",
+   "izq": 75,
+   "der": 80,
+   "unidad": "kg",
+   "diferencia_pct": 6.2,
+   "lado_menor": "izq",
+   "diferencia_pct_informe": 6.3,
+   "nivel_informe": "baja"
+  }
+ ],
+ "otras_medidas": [
+  {
+   "prueba": "Empuje Horizontal",
+   "valor": 150,
+   "unidad": "kg"
+  }
+ ],
+ "cociente_hq": {
+  "izq": 0.38,
+  "der": 0.53,
+  "detalle_izq": "Flexión 15 kg ÷ extensión 40 kg (promedio de ángulos)",
+  "detalle_der": "Flexión 20 kg ÷ extensión 38 kg (promedio de ángulos)"
+ },
+ "saltos": [
+  {
+   "prueba": "CMJ (Cv alto)",
+   "mejor_cm": 30.0,
+   "promedio_cm": 27.0,
+   "valores": [
+    24.0,
+    27.0,
+    30.0
+   ],
+   "cv_pct": 12.0,
+   "intentos": 3,
+   "protocolo": "manos libres"
+  }
+ ],
+ "drop_jumps": [
+  {
+   "caja_cm": 30,
+   "rsi": 1.5,
+   "altura_cm": 24.0,
+   "contacto_ms": 160,
+   "intentos": 1
+  },
+  {
+   "caja_cm": 45,
+   "rsi": 1.5,
+   "altura_cm": 24.0,
+   "contacto_ms": 160,
+   "intentos": 1
+  }
+ ],
+ "cmj_sj": null,
+ "sprint": {
+  "intentos": [
+   {
+    "intento": 1,
+    "mejor": false,
+    "parciales_s": {
+     "10": 2.0,
+     "20": 3.4
+    },
+    "tramos": {}
+   },
+   {
+    "intento": 2,
+    "mejor": true,
+    "parciales_s": {
+     "10": 1.95,
+     "20": 3.3
+    },
+    "tramos": {}
+   }
+  ],
+  "referencias": [],
+  "distancia_m": 20
+ },
+ "vbt": [
+  {
+   "ejercicio": "Trap Bar deadlift",
+   "series": [
+    {
+     "serie": 1,
+     "kg": 40.0,
+     "reps": 5,
+     "v_media": 0.95,
+     "v_mejor": 1.05,
+     "v_pico": 1.6
+    },
+    {
+     "serie": 2,
+     "kg": 60.0,
+     "reps": 4,
+     "v_media": 0.75,
+     "v_mejor": 0.85,
+     "v_pico": 1.3
+    },
+    {
+     "serie": 3,
+     "kg": 80.0,
+     "reps": 3,
+     "v_media": 0.55,
+     "v_mejor": 0.65,
+     "v_pico": 1.0
+    }
+   ],
+   "zonas": [
+    {
+     "zona": "Fuerza acelerativa",
+     "carga": "85 kg",
+     "kg": 85.0,
+     "v_m_s": 0.6
+    }
+   ]
+  }
+ ],
+ "plan": {
+  "intro": [
+   "Del 04/01/2027 al 14/02/2027. Contenido de prueba.",
+   "VELOCIDAD",
+   "CARGA",
+   "1.00 m/s",
+   "50 kg"
+  ],
+  "semanas": [
+   {
+    "n": 1,
+    "fase": "Base · Carga",
+    "objetivo": "Aprender los patrones con volumen bajo.",
+    "dias": [
+     {
+      "dia": "LUN",
+      "fecha": "04/01",
+      "titulo": "Fuerza básica",
+      "descripcion": "Barra hexagonal guiada por velocidad.",
+      "duracion_min": 50,
+      "ejercicios": [
+       {
+        "bloque": "FUERZA PRINCIPAL (VBT)",
+        "nombre": "Peso muerto con barra hexagonal",
+        "serie_extra": null,
+        "dosis": "3 × 5",
+        "carga": "50 kg",
+        "indicaciones": "VBT: mejor repetición 1.00 m/s. Cortar si baja de 0.90 m/s.",
+        "series": 3,
+        "reps": "5",
+        "por_lado": false
+       },
+       {
+        "bloque": "UNILATERAL",
+        "nombre": "Sentadilla búlgara",
+        "serie_extra": "+1 serie IZQ",
+        "dosis": "3 × 8 por lado",
+        "carga": "Mancuernas, RPE 7",
+        "indicaciones": "",
+        "series": 3,
+        "reps": "8",
+        "por_lado": true
+       },
+       {
+        "bloque": "UNILATERAL",
+        "nombre": "Nordic curl (isquiotibiales)",
+        "serie_extra": null,
+        "dosis": "2 × 4",
+        "carga": "",
+        "indicaciones": "",
+        "series": 2,
+        "reps": "4",
+        "por_lado": false
+       }
+      ]
+     },
+     {
+      "dia": "MIÉ",
+      "fecha": "06/01",
+      "titulo": "Velocidad",
+      "descripcion": "Aceleración corta.",
+      "duracion_min": 40,
+      "ejercicios": [
+       {
+        "bloque": "SPRINT",
+        "nombre": "Sprint de aceleración",
+        "serie_extra": null,
+        "dosis": "4 × 10 m",
+        "carga": "",
+        "indicaciones": "",
+        "series": 4,
+        "reps": "10 m",
+        "por_lado": false
+       },
+       {
+        "bloque": "SPRINT",
+        "nombre": "Empuje de trineo",
+        "serie_extra": null,
+        "dosis": "3 × 10 m",
+        "carga": "Moderada: que no se rompa la postura",
+        "indicaciones": "",
+        "series": 3,
+        "reps": "10 m",
+        "por_lado": false
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "n": 2,
+    "fase": "Base · Carga",
+    "objetivo": "Más volumen.",
+    "dias": [
+     {
+      "dia": "LUN",
+      "fecha": "11/01",
+      "titulo": "Fuerza básica",
+      "descripcion": "Barra hexagonal guiada por velocidad.",
+      "duracion_min": 50,
+      "ejercicios": [
+       {
+        "bloque": "FUERZA PRINCIPAL (VBT)",
+        "nombre": "Peso muerto con barra hexagonal",
+        "serie_extra": null,
+        "dosis": "4 × 5",
+        "carga": "95 kg",
+        "indicaciones": "",
+        "series": 4,
+        "reps": "5",
+        "por_lado": false
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "cargas_por_velocidad": [
+   {
+    "m_s": 1.0,
+    "kg": 50.0
+   }
+  ],
+  "desde": "04/01/2027",
+  "hasta": "14/02/2027"
+ },
+ "textos": {
+  "CIERRE · Plan de acción": "Solo una carga evaluada en VBT; completar el perfil. \nReevaluar en 6 semanas."
+ }
+}

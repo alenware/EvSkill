@@ -2,7 +2,7 @@
 """Convierte un informe KineReach (PDF) en Markdown legible y en JSON estructurado.
 
 Uso:
-    python kinereach_md.py informe.pdf [otro.pdf ...] [--salida DIR] [--con-texto]
+    python scripts/convertir.py informe.pdf [otro.pdf ...] [--salida DIR] [--con-texto]
 
 Por cada PDF escribe, en --salida (por defecto, la carpeta del PDF):
     <nombre>.md    el informe limpio: datos en tablas y el plan semana a semana

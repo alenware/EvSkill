@@ -1,13 +1,16 @@
 # Nunca subir informes reales ni lo que sale de ellos
 *.pdf
-*.md.bak
-trabajo/
-salida/
-*.revision.md
-*.comparacion.md
-*.plan.csv
 *.json
 *.txt
-!requirements.txt
+*.csv
+*.revision.md
+*.comparacion.md
+*.vbt.md
+trabajo/
+salida/
 __pycache__/
 *.pyc
+
+# Excepciones: dependencias y ejemplos generados con el PDF sintético
+!requirements.txt
+!ejemplos/*

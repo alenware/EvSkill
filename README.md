@@ -1,101 +1,128 @@
-# kinereach-md
+# EvSkill
 
-Convierte informes de evaluación física **KineReach** (PDF) en **Markdown** y **JSON**, y después los procesa:
+Herramienta para **leer, verificar y procesar informes de evaluación física KineReach (PDF)**:
 
-- revisa incoherencias del informe;
-- saca el perfil carga-velocidad del VBT;
-- pasa el plan de entrenamiento a CSV;
+- pasa cada PDF a Markdown limpio y a JSON con los datos;
+- revisa las incoherencias del informe;
+- calcula las cargas del VBT;
+- exporta el plan de 6 semanas a CSV;
 - compara una evaluación con su reevaluación.
 
-Se puede usar como **skill de Claude Code** o como dos scripts de Python sueltos. Funciona sin red y solo necesita PyMuPDF.
+Funciona sin red y solo necesita Python 3.9+ y PyMuPDF.
 
-> *English: converts KineReach physical-assessment PDF reports into clean Markdown + structured JSON, checks the report for inconsistencies, fits the load-velocity profile, exports the 6-week training plan to CSV and compares two assessments. Spanish-language reports.*
+> *English: tools for AI agents and humans to convert KineReach assessment PDFs (Spanish) into clean Markdown + structured JSON, check them for data errors, fit the VBT load-velocity profile, export the training plan to CSV and compare assessments.*
 
-## Qué resuelve
+Este README está escrito **para que un agente de IA** (Claude, Codex, GPT…) sepa usar la herramienta sin explorar el código. Si eres una persona, también te sirve.
 
-Un informe KineReach tiene entre 20 y 40 páginas. Gran parte es texto explicativo que se repite en todos los informes, y las tablas salen partidas en columnas. Copiar los números a mano o pedírselos a un modelo leyendo el PDF da errores. Este proyecto:
+---
 
-1. **Extrae** lo que importa en tablas:
-   - ficha del atleta, autorreporte y encuadre;
-   - movilidad y dinamometría por lado, con la diferencia recalculada;
-   - cociente isquios/cuádriceps;
-   - saltos (CMJ, SJ, drop jump), sprint por tramos y VBT;
-   - el **plan de 6 semanas**, día por día: bloque, ejercicio, dosis, serie extra del lado débil, carga e indicaciones.
-2. **Revisa** el informe y avisa de errores reales que aparecen en estos PDF:
-   - estatura en metros marcada como cm;
-   - totales que no suman izquierda + derecha;
-   - drop jumps duplicados;
-   - RSI que no cuadra con altura y contacto;
-   - parciales de sprint imposibles;
-   - un análisis que dice "una sola carga" cuando el VBT tiene cinco;
-   - cargas del plan por encima de lo medido.
-3. **Procesa** los datos:
-   - kilos para cada velocidad de barra;
-   - el plan en CSV;
-   - comparación antes/después.
+## Para la IA: lo esencial
+
+**Cuándo usarla:** siempre que tengas que leer, resumir, verificar o usar datos de un PDF de KineReach o KideoReach, o programar entrenamiento a partir de uno.
+
+**Regla 1. No leas el PDF directamente.** Ejecuta esto y lee el `.md`:
+
+```bash
+python evskill.py todo "ruta/al/informe.pdf" --salida "carpeta/de/trabajo"
+```
+
+Ese comando hace todo de una vez:
+
+| Fichero | Para qué |
+|---|---|
+| `<nombre>.md` | **Léelo tú.** El informe en tablas, sin texto repetido y con el plan día a día |
+| `<nombre>.json` | Los datos para calcular. Esquema en [docs/esquema-json.md](docs/esquema-json.md) |
+| `<nombre>.revision.md` | **Avisos de datos dudosos.** Cuéntaselos al usuario |
+| `<nombre>.plan.csv` | El plan, una fila por ejercicio y día (solo si el informe trae plan) |
+| `<nombre>.txt` | Todo el texto del PDF, por si algo no se reconoció |
+
+**Regla 2. Revisa antes de usar.** Los informes KineReach traen errores reales: estatura en metros marcada como cm, sumas que no cuadran, drop jumps duplicados, un análisis que contradice su propia tabla de VBT… Abre `<nombre>.revision.md` y comunica los avisos **en el chat**, como preguntas para quien evaluó. No corrijas datos en silencio y no pongas la revisión en un entregable. Qué significa cada aviso: [docs/revisiones.md](docs/revisiones.md).
+
+**Regla 3. Los números salen del JSON, no de tu memoria.** Para calcular, lee el `.json` o usa los subcomandos. No copies cifras del PDF a ojo.
+
+**Regla 4. Privacidad.** Son datos de salud, muchas veces de menores. No subas los informes ni sus salidas a servicios externos ni a repositorios. Usa siempre una `--salida` local.
+
+### Subcomandos
+
+| Necesitas | Comando |
+|---|---|
+| Todo de una vez (lo normal) | `python evskill.py todo informe.pdf [...] --salida DIR` |
+| Solo convertir | `python evskill.py convertir informe.pdf [...] --salida DIR [--con-texto]` |
+| Solo revisar | `python evskill.py revisar DIR/informe.json` |
+| Kilos para entrenar por velocidad | `python evskill.py vbt DIR/informe.json -v 1.0 0.8 0.6` |
+| El plan en CSV | `python evskill.py csv DIR/informe.json` |
+| Evolución entre dos evaluaciones | `python evskill.py comparar DIR/inicial.json DIR/reevaluacion.json` |
+
+Con `python evskill.py` sin argumentos ves la ayuda.
+
+### Cómo interpretar las salidas
+
+- **Diferencia entre lados** = (lado mayor − lado menor) / lado mayor. Se considera baja si es menor del 10 %, moderada entre el 10 y el 15 % y alta desde el 15 %. El script la **recalcula**: usa `diferencia_pct`, no la del informe.
+- **VBT:** KineReach calcula las zonas y las cargas del plan con la **mejor repetición** de cada serie, y `vbt` hace lo mismo por defecto (`--media` usa la velocidad media).
+  - Si r < 0,9, los kilos estimados son poco fiables.
+  - No propongas cargas por encima de la más alta medida sin decirlo.
+- **Comparar:** un cambio del orden del error del test (CV del salto, una décima en el sprint) no es una mejora. Confirma también que se usó el mismo protocolo.
+- **`secciones` vacío** en el JSON = el PDF no es de KineReach. Solo tienes el texto.
+- **`sin_reconocer` con elementos:** esa sección está en el `.txt`, no en el `.md`.
+
+### Lo que la herramienta no sabe (pregúntalo si importa)
+
+- la pierna dominante;
+- el protocolo de los tests;
+- el calendario de partidos;
+- el historial de lesiones.
+
+### Flujo típico
+
+```
+Usuario: "mira la evaluación de X y hazle el programa"
+ 1. python evskill.py todo "X.pdf" --salida trabajo/
+ 2. leer trabajo/X.md → diagnóstico (asimetrías, saltos, sprint, VBT)
+ 3. leer trabajo/X.revision.md → contar los avisos y preguntar lo dudoso
+ 4. con datos confirmados: python evskill.py vbt trabajo/X.json -v ... para las cargas
+ 5. programar (fuera de esta herramienta)
+```
+
+Ejemplos reales de todas las salidas, generados con un PDF sintético, en [`ejemplos/`](ejemplos/).
+
+---
 
 ## Instalación
 
 ```bash
-pip install pymupdf
+git clone https://github.com/iggtht/EvSkill
+pip install -r EvSkill/requirements.txt
 ```
 
-**Como skill de Claude Code:** clona el repo dentro de tu carpeta de skills.
+**Como skill de Claude Code:** clónalo dentro de tu carpeta de skills. Claude lo usará solo cuando le pases un informe KineReach (entra por [`SKILL.md`](SKILL.md)).
 
 ```bash
-git clone https://github.com/iggtht/kinereach-md ~/.claude/skills/kinereach-md
+git clone https://github.com/iggtht/EvSkill ~/.claude/skills/EvSkill
 ```
 
-Claude la usará sola cuando le pases un informe KineReach. `SKILL.md` describe el flujo.
+**Otros agentes (Codex, Cursor…):** apúntalos a este README o copia la sección "Para la IA" a su fichero de instrucciones (`AGENTS.md` o similar).
 
-**Como scripts sueltos:** clónalo donde quieras y usa `scripts/`.
+## Estructura
 
-## Uso
-
-```bash
-# 1. PDF → .md + .json + .txt
-python scripts/kinereach_md.py "EVALUACION.pdf" --salida trabajo/
-
-# 2. Revisar los datos (escribe EVALUACION.revision.md)
-python scripts/procesar.py revisar trabajo/EVALUACION.json
-
-# 3. Procesar
-python scripts/procesar.py vbt trabajo/EVALUACION.json -v 1.0 0.8 0.6   # kilos por velocidad
-python scripts/procesar.py csv trabajo/EVALUACION.json                  # plan → EVALUACION.plan.csv
-python scripts/procesar.py comparar trabajo/inicial.json trabajo/reevaluacion.json
 ```
-
-Ejemplo de revisión (salida real con el PDF sintético de los tests):
-
-```text
-## Biométricos
-- La estatura figura como 1.7 cm: casi seguro está en metros; con el peso y el IMC del informe sale 170 cm.
-## Sumas
-- Empuje Horizontal = 150 kg, pero izq + der de «Empuje horizontal» = 75 + 80 = 155 kg.
-## Drop jump
-- Cajas 30 y 45 cm con la misma altura y contacto (24.0 cm, 160 ms): dato duplicado.
-## VBT
-- El análisis del informe dice que hubo una sola carga, pero la tabla de Trap Bar deadlift tiene 3 cargas distintas (40, 60, 80 kg).
-## Plan
-- Semana 2 LUN: «Peso muerto con barra hexagonal» con 95 kg, por encima de la carga máxima medida (80 kg).
+EvSkill/
+├── evskill.py              ← punto de entrada único (todo, convertir, revisar, vbt, csv, comparar)
+├── SKILL.md                ← entrada para Claude Code (corta; remite aquí)
+├── README.md               ← esta guía
+├── scripts/
+│   ├── convertir.py        ← PDF → .md + .json + .txt
+│   └── procesar.py         ← revisar, vbt, csv, comparar sobre el JSON
+├── docs/
+│   ├── esquema-json.md     ← todas las claves del JSON
+│   ├── revisiones.md       ← qué detecta cada aviso y qué hacer
+│   └── formato-kinereach.md← cómo está hecho el PDF (para mantener el conversor)
+├── ejemplos/               ← PDF sintético y todas sus salidas
+├── tests/
+│   ├── fabricar_demo.py    ← fabrica el PDF sintético (datos inventados, errores sembrados)
+│   └── test_evskill.py
+├── requirements.txt
+└── .github/workflows/tests.yml
 ```
-
-Y un día del plan en el `.md`:
-
-| Bloque | Ejercicio | Dosis | Carga / nota |
-|---|---|---|---|
-| FUERZA PRINCIPAL (VBT) | Peso muerto con barra hexagonal<br>_VBT: mejor repetición 1.00 m/s. Cortar si baja de 0.90 m/s._ | 3 × 5 | 50 kg |
-| UNILATERAL | Sentadilla búlgara **(+1 serie IZQ)** | 3 × 8 por lado | Mancuernas, RPE 7 |
-
-## Cómo funciona
-
-- **Texto con posición.** PyMuPDF lee cada línea del PDF con su posición y su tamaño de letra. Se quitan las cabeceras y los pies que se repiten en cada página, y también los sellos de impresión del navegador.
-- **Secciones.** El informe se corta en sus secciones numeradas (`01 VISIÓN GENERAL`, `02 BIOMÉTRICOS`…). La numeración cambia según los módulos medidos, así que cada sección se reconoce por su nombre.
-- **Datos por sección.** Cada sección tiene su lector: tarjetas IZQ/DER, bloques de salto, tabla de sprint y tabla VBT.
-- **Columnas del plan.** El plan se lee por columnas. A la izquierda va el ejercicio y, en letra más pequeña, sus indicaciones; en el centro, la dosis; a la derecha, la carga o la nota.
-- **Lo demás.** Lo que no tiene lector (análisis, cierre, informes de vídeo KideoReach) pasa como texto en párrafos.
-
-Probado con exportaciones de septiembre a noviembre de 2026, impresas desde Chrome y desde Safari en iOS. Si KineReach cambia la maqueta, el plan es lo primero que se rompe. El conversor avisa de las secciones que no reconoce y deja el texto completo en el `.txt`.
 
 ## Tests
 
@@ -103,11 +130,16 @@ Probado con exportaciones de septiembre a noviembre de 2026, impresas desde Chro
 python -m unittest discover -s tests
 ```
 
-Los tests fabrican un PDF **sintético** con la maqueta de un informe y datos inventados (`tests/fabricar_demo.py`), con errores sembrados a propósito. En este repo no hay ningún informe real: son datos de salud, muchas veces de menores.
+Los tests fabrican un PDF **sintético** con la maqueta de un informe KineReach y datos inventados, con errores sembrados a propósito para que `revisar` los encuentre. En este repo no hay ningún informe real.
+
+## Limitaciones
+
+- Probado con exportaciones de septiembre a noviembre de 2026, impresas desde Chrome y desde Safari en iOS. Si KineReach cambia la maqueta, el plan es lo primero que se rompe: compara el `.md` con el PDF y mira [docs/formato-kinereach.md](docs/formato-kinereach.md).
+- Los informes de vídeo (KideoReach) y el análisis en prosa salen como texto, no como datos.
 
 ## Aviso
 
-Proyecto independiente, sin relación con KineReach. Solo lee los PDF que el propio usuario exporta. Los avisos de la revisión son preguntas para quien evaluó, no diagnósticos.
+Proyecto independiente, sin relación con KineReach. Solo procesa los PDF que exporta el propio usuario. Los avisos de la revisión no son diagnósticos.
 
 ## Licencia
 
