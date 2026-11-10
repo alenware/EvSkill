@@ -1,0 +1,13 @@
+# Nunca subir informes reales ni lo que sale de ellos
+*.pdf
+*.md.bak
+trabajo/
+salida/
+*.revision.md
+*.comparacion.md
+*.plan.csv
+*.json
+*.txt
+!requirements.txt
+__pycache__/
+*.pyc
